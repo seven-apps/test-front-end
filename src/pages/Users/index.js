@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaSearch } from 'react-icons/fa';
 import api from '~/services/api';
 import UsersList from '~/components/UsersList';
 
@@ -6,11 +7,13 @@ import { Wrapper, UserContainer, Header, Content, Title } from './styles';
 
 export default function Users() {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
 
   useEffect(() => {
     async function loadUsers() {
+      setLoading(true);
       const response = await api.get();
 
       const data = response.data.data.map((user, index) => ({
@@ -18,6 +21,7 @@ export default function Users() {
         ...user,
       }));
       setUsers(data);
+      setLoading(false);
     }
     loadUsers();
   }, []);
@@ -55,7 +59,7 @@ export default function Users() {
   return (
     <Wrapper>
       <Content>
-        <Title>Searcher</Title>
+        <Title>User Searcher</Title>
         <Header>
           <div>
             <label htmlFor="name">Nome</label>
@@ -77,7 +81,7 @@ export default function Users() {
           </div>
         </Header>
         <UserContainer>
-          <UsersList users={users} />
+          <UsersList users={users} loading={loading} />
         </UserContainer>
       </Content>
     </Wrapper>

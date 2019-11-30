@@ -1,21 +1,29 @@
 import React from 'react';
 import { List } from 'react-virtualized';
+import { FaSpinner } from 'react-icons/fa';
+import { ListContainer, Row, Content, Loading } from './styles';
 
-import './styles.css';
+export default function UsersList({ users, loading }) {
+  if (loading) {
+    return (
+      <Loading>
+        <FaSpinner color="#FFF" size={40} />
+      </Loading>
+    );
+  }
 
-export default function UsersList({ users }) {
   function renderRow({ index, key, style }) {
     return (
-      <div key={key} style={style} className="row">
-        <div className="content">
+      <Row key={key} style={style}>
+        <Content>
           <p>Nome: {users[index].name}</p>
           <p>Idade: {users[index].age}</p>
-        </div>
-      </div>
+        </Content>
+      </Row>
     );
   }
   return (
-    <div className="list">
+    <ListContainer>
       <List
         width={850}
         height={600}
@@ -23,6 +31,6 @@ export default function UsersList({ users }) {
         rowRenderer={renderRow}
         rowCount={users.length}
       />
-    </div>
+    </ListContainer>
   );
 }
