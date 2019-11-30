@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   padding: 30px 0;
-  height: 100%;
   background: linear-gradient(-90deg, #ffcda5, #ee4d5f);
 `;
 
@@ -55,6 +54,7 @@ export const Header = styled.div`
 export const UserContainer = styled.div`
   border: 1px solid #fff;
   background: rgba(0, 0, 0, 0.2);
+  height: 670px;
   border-radius: 5px;
   padding: 15px 0;
   display: flex;

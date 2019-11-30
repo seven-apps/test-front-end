@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { List } from 'react-virtualized';
 import { FaSpinner } from 'react-icons/fa';
 import { ListContainer, Row, Content, Loading } from './styles';
@@ -25,6 +26,7 @@ export default function UsersList({ users, loading }) {
   return (
     <ListContainer>
       <List
+        data-testid="list"
         width={850}
         height={600}
         rowHeight={80}

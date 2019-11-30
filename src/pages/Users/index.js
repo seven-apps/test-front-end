@@ -14,13 +14,9 @@ export default function Users() {
   useEffect(() => {
     async function loadUsers() {
       setLoading(true);
-      const response = await api.get();
+      const { data } = await api.get();
 
-      const data = response.data.data.map((user, index) => ({
-        id: index + 1,
-        ...user,
-      }));
-      setUsers(data);
+      setUsers(data.data);
       setLoading(false);
     }
     loadUsers();
@@ -30,6 +26,8 @@ export default function Users() {
     const searchName = e.target.value;
     setName(searchName);
 
+    setLoading(true);
+
     const { data } = await api.get();
 
     const usersFiltered = data.data.filter(user =>
@@ -37,11 +35,14 @@ export default function Users() {
     );
 
     setUsers(usersFiltered);
+    setLoading(false);
   }
 
   async function handleSearchByAge(e) {
     const searchAge = e.target.value;
     setAge(searchAge);
+
+    setLoading(true);
 
     const { data } = await api.get();
 
@@ -51,8 +52,10 @@ export default function Users() {
 
     if (searchAge === '') {
       setUsers(data.data);
+      setLoading(false);
     } else {
       setUsers(usersFiltered);
+      setLoading(false);
     }
   }
 
