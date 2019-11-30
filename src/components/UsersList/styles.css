@@ -8,9 +8,13 @@
   display: flex;
   align-items: center;
 }
-.image {
-  margin-right: 10px;
-}
+
 .content {
   padding: 10px;
+}
+
+.content p {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 5px;
 }
