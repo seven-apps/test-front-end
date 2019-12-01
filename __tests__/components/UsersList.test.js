@@ -9,9 +9,12 @@ const apiMock = new MockAdapter(api);
 
 describe('UsersList component', () => {
   it('should render a complete component', async () => {
-    const { getByTestId, getByText } = render(<UsersList />);
+        const users = apiMock
+      .onGet()
+      .reply(200, { data: [{ name: 'Pedro', age: 24 }] });
+      const loading = false;
+    const { getByTestId, getByText } = render(<UsersList users={users} loading={loading} />);
 
-    apiMock.onGet('users').reply(200, { data: [{ name: 'Pedro', age: 24 }] });
 
     expect(getByTestId('list')).toContainElement(getByText('Pedro'));
   });

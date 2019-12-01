@@ -24,9 +24,8 @@ export default function UsersList({ users, loading }) {
     );
   }
   return (
-    <ListContainer>
-      <List
-        data-testid="list"
+    <ListContainer data-testid="list">
+      <List        
         width={850}
         height={600}
         rowHeight={80}
