@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   padding: 30px 0;
+  height: 100%;
   background: linear-gradient(-90deg, #ffcda5, #ee4d5f);
 `;
 
@@ -15,12 +16,14 @@ export const Content = styled.div`
 
 export const Title = styled.h1`
   align-self: center;
+  font-weight: normal;
   font-size: 30px;
   color: #fff;
   margin-bottom: 15px;
 `;
 
 export const Header = styled.div`
+  margin-top: 50px;
   margin-bottom: 30px;
   display: flex;
   justify-content: space-around;

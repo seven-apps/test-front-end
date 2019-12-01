@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { FaSearch } from 'react-icons/fa';
 import api from '~/services/api';
 import UsersList from '~/components/UsersList';
 
@@ -31,11 +30,21 @@ export default function Users() {
     const { data } = await api.get();
 
     const usersFiltered = data.data.filter(user =>
-      user.name.toLowerCase().includes(searchName.toLowerCase())
+      user.name
+        .toLowerCase()
+        .includes(
+          searchName.toLowerCase() ||
+            user.name.toLowerCase() === searchName.toLowerCase()
+        )
     );
 
-    setUsers(usersFiltered);
-    setLoading(false);
+    if (searchName === '') {
+      setUsers(data.data);
+      setLoading(false);
+    } else {
+      setUsers(usersFiltered);
+      setLoading(false);
+    }
   }
 
   async function handleSearchByAge(e) {
@@ -60,12 +69,13 @@ export default function Users() {
   }
 
   return (
-    <Wrapper>
-      <Content>
-        <Title>User Searcher</Title>
+    <Wrapper data-testid="wrapper">
+      <Content data-testid="content">
+        <Title>Busca Usuários</Title>
+        <hr />
         <Header>
           <div>
-            <label htmlFor="name">Nome</label>
+            <label htmlFor="name">NOME</label>
             <input
               type="text"
               id="name"
@@ -74,7 +84,7 @@ export default function Users() {
             />
           </div>
           <div>
-            <label htmlFor="age">Idade</label>
+            <label htmlFor="age">IDADE</label>
             <input
               type="number"
               id="age"
@@ -83,7 +93,7 @@ export default function Users() {
             />
           </div>
         </Header>
-        <UserContainer>
+        <UserContainer data-testid="list">
           <UsersList users={users} loading={loading} />
         </UserContainer>
       </Content>

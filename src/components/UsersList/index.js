@@ -7,13 +7,13 @@ import { ListContainer, Row, Content, Loading } from './styles';
 export default function UsersList({ users, loading }) {
   if (loading) {
     return (
-      <Loading>
-        <FaSpinner color="#FFF" size={40} />
+      <Loading data-testid="loading">
+        <FaSpinner data-testid="svg" color="#FFF" size={40} />
       </Loading>
     );
   }
 
-  function renderRow({ index, key, style }) {
+  function renderRow({ index, key, style }) { //eslint-disable-line
     return (
       <Row key={key} style={style}>
         <Content>
@@ -24,8 +24,9 @@ export default function UsersList({ users, loading }) {
     );
   }
   return (
-    <ListContainer data-testid="list">
-      <List        
+    <ListContainer data-testid="listContainer">
+      <List
+        data-testid="list"
         width={850}
         height={600}
         rowHeight={80}
@@ -35,3 +36,18 @@ export default function UsersList({ users, loading }) {
     </ListContainer>
   );
 }
+
+UsersList.propTypes = {
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      age: PropTypes.number.isRequired,
+    })
+  ),
+  loading: PropTypes.bool,
+};
+
+UsersList.defaultProps = {
+  users: [],
+  loading: false,
+};
