@@ -4,7 +4,7 @@ O seu desáfio será de criar uma pagina web, em React.js, com uma listagem para
 
 Vamos analisar os seguintes pontos:
 
-- Typescript(se possível)
+
 - Organização do código
 - Separação dos componentes
 - Performance
